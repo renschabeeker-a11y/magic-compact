@@ -18,6 +18,10 @@ Instead of collapsing an entire session into a single generic summary, Magic Com
 
 The assistant's thought process, decisions, and actions remain in context along with all your commands while unnecessary bloat is stripped away. Long tool calls are aggressively pruned but can be retrieved via a custom `read_omitted_content` tool.
 
+<p align="center">
+  <img src=".github/assets/visualization.png" alt="Compaction Comparison" />
+</p>
+
 ## Features
 
 - Lossless context compression — Fully preserve working memory instead of flattening history into one recap.
