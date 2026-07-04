@@ -32,6 +32,9 @@ Install from the CLI:
 
 ```bash
 opencode plugin magic-compact --global
+
+# If you are encountering "No veresions available:
+NPM_CONFIG_MIN_RELEASE_AGE=0 opencode plugin magic-compact --global
 ```
 
 This installs the package and adds it to your global OpenCode config.
