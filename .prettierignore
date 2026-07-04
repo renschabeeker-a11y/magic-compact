@@ -1,0 +1,6 @@
+node_modules/
+opencode-src/
+opencode-example-plugin/
+internal/
+.githooks/
+bun.lock
