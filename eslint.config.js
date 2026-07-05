@@ -5,13 +5,7 @@ import globals from "globals";
 
 export default tseslint.config(
   {
-    ignores: [
-      "node_modules/",
-      "dist/",
-      "opencode-src/",
-      "opencode-example-plugin/",
-      "internal/",
-    ],
+    ignores: ["node_modules/", "dist/", "src-*/", "internal/"],
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,

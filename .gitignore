@@ -3,7 +3,7 @@
 node_modules
 
 # OpenCode source code
-/opencode-*
+/src-*
 
 # output
 out
