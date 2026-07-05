@@ -29,7 +29,9 @@ jobs:
         uses: oven-sh/setup-bun@v2
 
       - run: bun install --frozen-lockfile
-      - run: npm publish --provenance
+      - name: Publish OpenCode plugin
+        working-directory: packages/opencode-plugin
+        run: npm publish --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - run: gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --generate-notes

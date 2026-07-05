@@ -1,29 +1,17 @@
 {
-  "name": "magic-compact",
-  "version": "1.0.0",
-  "description": "Lossless context compression plugin for OpenCode.",
+  "name": "magic-compact-base",
+  "private": true,
+  "description": "Magic Compact workspace",
   "type": "module",
-  "module": "src/index.ts",
-  "main": "src/index.ts",
-  "exports": {
-    ".": {
-      "import": "./src/index.ts"
-    },
-    "./server": {
-      "import": "./src/index.ts"
-    }
-  },
-  "files": [
-    "src",
-    "README.md"
+  "workspaces": [
+    "packages/*"
   ],
   "scripts": {
-    "prepublishOnly": "bun run typecheck",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "format": "prettier --write .",
     "prepare": "git config core.hooksPath .githooks",
-    "release": "sh scripts/release.sh"
+    "release-opencode": "sh scripts/release-opencode.sh"
   },
   "keywords": [
     "opencode",
@@ -49,17 +37,8 @@
   },
   "homepage": "https://github.com/aerovato/magic-compact#readme",
   "author": "kevinMEH",
-  "peerDependencies": {
-    "@opencode-ai/plugin": ">=1.17.9"
-  },
-  "dependencies": {
-    "@opencode-ai/sdk": "^1.17.9",
-    "gpt-tokenizer": "^3.4.0",
-    "zod": "^4.4.3"
-  },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@opencode-ai/plugin": "^1.17.9",
     "@types/bun": "latest",
     "eslint": "^10.5.0",
     "eslint-config-prettier": "^10.1.8",

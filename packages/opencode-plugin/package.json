@@ -1,0 +1,56 @@
+{
+  "name": "magic-compact",
+  "version": "1.0.0",
+  "description": "Lossless context compression plugin for OpenCode.",
+  "type": "module",
+  "module": "src/index.ts",
+  "main": "src/index.ts",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts"
+    },
+    "./server": {
+      "import": "./src/index.ts"
+    }
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit -p ../../tsconfig.json",
+    "lint": "eslint src",
+    "format": "prettier --write src"
+  },
+  "keywords": [
+    "opencode",
+    "opencode-plugin",
+    "claude-code",
+    "claude",
+    "codex",
+    "openai",
+    "gemini",
+    "cursor",
+    "ai",
+    "llm",
+    "plugin",
+    "context",
+    "compaction"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aerovato/magic-compact.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aerovato/magic-compact/issues"
+  },
+  "homepage": "https://github.com/aerovato/magic-compact#readme",
+  "author": "kevinMEH",
+  "peerDependencies": {
+    "@opencode-ai/plugin": ">=1.17.9"
+  },
+  "dependencies": {
+    "@opencode-ai/sdk": "^1.17.9",
+    "gpt-tokenizer": "^3.4.0",
+    "zod": "^4.4.3"
+  }
+}

@@ -27,6 +27,6 @@
     "noUnusedParameters": false,
     "noPropertyAccessFromIndexSignature": false
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "opencode-*"]
+  "include": ["packages/*/src/**/*.ts"],
+  "exclude": ["node_modules", "src-*", "internal"]
 }
