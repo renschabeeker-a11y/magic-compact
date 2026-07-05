@@ -1,5 +1,7 @@
 # Magic Compact
 
+English | [中文](./README.zh-CN.md)
+
 Lossless context compression mechanism for OpenCode.
 
 <p align="center">
@@ -37,7 +39,7 @@ Install from the CLI:
 ```bash
 opencode plugin magic-compact --global
 
-# If you are encountering "No veresions available:
+# If you are encountering "No versions available:
 NPM_CONFIG_MIN_RELEASE_AGE=0 opencode plugin magic-compact --global
 ```
 
@@ -99,7 +101,7 @@ Pending, running, and errored tool calls are always preserved as-is.
 
 ## Vs DCP Plugin
 
-OpenCode-DCP is a runtime context filter that rewrites the message array on every request. Magic Compact takes a different approach.
+OpenCode-DCP is a runtime context management system that rewrites messages when requested by the model. Magic Compact takes a different approach.
 
 Magic Compact Offers:
 
