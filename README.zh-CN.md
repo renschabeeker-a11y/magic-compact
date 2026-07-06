@@ -131,39 +131,4 @@ Magic Compact 提供:
 
 ## 开发
 
-```bash
-bun install
-bun run typecheck   # TypeScript 类型检查
-bun run lint        # ESLint
-bun run format      # Prettier
-```
-
-`src/`
-
-- `index.ts` — 插件入口:注册 `/magic-compact`、`/magic-stats`、`read_omitted_content`,以及统计事件记账
-- `magic-compact.ts` — `/magic-compact` 命令编排:备份优先的压缩流程、修剪、统计记账、故障恢复
-- `magic-stats.ts` — `/magic-stats` 命令执行:统计读取和提示注入
-- `api.ts` — SDK 辅助层:V2 客户端构造、响应解包、toast 辅助、会话清理
-- `util.ts` — 共享辅助:`isRecord` 类型守卫、`unwrapString`
-
-`src/compact/`
-
-- `compact.ts` — 核心压缩编排:计划创建、临时会话摘要、摘要注入
-- `plan.ts` — 压缩规划:消息获取、回合分组、被摘要/下一回合选择
-- `prune.ts` — 工具 I/O 修剪:省略分配、按工具的输出/输入阈值、省略提示
-- `session.ts` — 备份和会话辅助:fork 备份、缓存/统计复制、边界提示注入、压缩后清理
-- `template.ts` — 压缩提示构建器:用于临时会话的 XML 摘要模板
-- `constants.ts` — 压缩常量:part ID 辅助、省略提示格式、边界元数据
-
-`src/storage/`
-
-- `store.ts` — 文件系统辅助:插件存储目录、Zod 校验的 JSON 读写
-- `omission.ts` — 省略缓存:Content ID 分配、按会话条目的存储和检索
-- `stats.ts` — 统计存储:按对话的统计持久化 schema 和读/写/复制
-
-`src/stats/`
-
-- `events.ts` — 实时事件记账:助手消息完成处理、缓存 token 节省
-- `tokenize.ts` — Token 计数:基于 GPT 分词器的 part/消息 token 估算
-- `pricing.ts` — 缓存读取定价表:按模型的每百万 token 美元查找
-- `constants.ts` — 统计格式化:压缩和摘要消息构建器、统计元数据
+请查看 [`docs/Development.md`](./docs/Development.md) 了解安装和常用维护命令。

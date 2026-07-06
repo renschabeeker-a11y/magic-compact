@@ -129,39 +129,4 @@ If you want a lightweight, user-driven compaction tool with minimal ongoing over
 
 ## Development
 
-```bash
-bun install
-bun run typecheck   # TypeScript type checking
-bun run lint        # ESLint
-bun run format      # Prettier
-```
-
-`src/`
-
-- `index.ts` — Plugin entrypoint: registers `/magic-compact`, `/magic-stats`, `read_omitted_content`, and stats event accounting
-- `magic-compact.ts` — `/magic-compact` command orchestration: backup-first compaction flow, pruning, stats accounting, failure recovery
-- `magic-stats.ts` — `/magic-stats` command execution: stats read and notice injection
-- `api.ts` — SDK helper layer: V2 client construction, response unwrapping, toast helpers, session cleanup
-- `util.ts` — Shared helpers: `isRecord` type guard, `unwrapString`
-
-`src/compact/`
-
-- `compact.ts` — Core compaction orchestration: plan creation, ephemeral session summarization, summary injection
-- `plan.ts` — Compaction planning: message fetch, turn grouping, summarized/next-turn selection
-- `prune.ts` — Tool I/O pruning: omission allocation, per-tool output/input thresholds, omission notices
-- `session.ts` — Backup and session helpers: fork backup, cache/stats copy, boundary notice injection, post-compaction cleanup
-- `template.ts` — Compaction prompt builder: XML summary template for the ephemeral session
-- `constants.ts` — Compaction constants: part ID helpers, omission notice formats, boundary metadata
-
-`src/storage/`
-
-- `store.ts` — Filesystem helpers: plugin storage directory, Zod-validated JSON read/write
-- `omission.ts` — Omission cache: Content ID allocation, per-session entry storage and retrieval
-- `stats.ts` — Stats storage: per-conversation stats persistence schema and read/write/copy
-
-`src/stats/`
-
-- `events.ts` — Real-time event accounting: assistant message completion handling, cached-token savings
-- `tokenize.ts` — Token counting: GPT tokenizer-based part/message token estimation
-- `pricing.ts` — Cached-read pricing table: per-model dollars-per-million-tokens lookup
-- `constants.ts` — Stats formatting: compaction and summary message builders, stats metadata
+See [`docs/Development.md`](./docs/Development.md) for setup and maintenance commands.
