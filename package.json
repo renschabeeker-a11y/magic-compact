@@ -11,7 +11,8 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "prepare": "git config core.hooksPath .githooks",
-    "release-opencode": "sh scripts/release-opencode.sh"
+    "release-opencode": "sh scripts/release-opencode.sh",
+    "release-claude": "sh scripts/release-claude.sh"
   },
   "keywords": [
     "opencode",
@@ -40,6 +41,7 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/bun": "latest",
+    "@types/node": "latest",
     "eslint": "^10.5.0",
     "eslint-config-prettier": "^10.1.8",
     "globals": "^17.6.0",
