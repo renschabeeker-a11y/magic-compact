@@ -50,4 +50,4 @@ git add \
   "packages/claude-code-plugin/package.json"
 git commit -m "claude@v$version"
 git tag "claude@v$version"
-git push origin main --follow-tags
+git push origin main "claude@v$version"
