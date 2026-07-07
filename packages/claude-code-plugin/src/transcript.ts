@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
 import { constants } from "node:fs";
-import { access, copyFile, readFile } from "node:fs/promises";
+import { access, appendFile, copyFile, readFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 
 export type JsonRecord = Record<string, unknown>;
@@ -338,3 +338,43 @@ const PRESERVED_METADATA_TYPES = new Set([
   "task-summary",
   "permission-mode",
 ]);
+
+export async function resolveSessionTitle(
+  transcriptPath: string,
+): Promise<string | null> {
+  const entries = await readTranscriptEntries(transcriptPath);
+  let customTitle: string | null = null;
+  let aiTitle: string | null = null;
+  for (const entry of entries) {
+    if (!isRecord(entry)) {
+      continue;
+    }
+    if (
+      entry["type"] === "custom-title"
+      && typeof entry["customTitle"] === "string"
+    ) {
+      customTitle = entry["customTitle"];
+    } else if (
+      entry["type"] === "ai-title"
+      && typeof entry["aiTitle"] === "string"
+    ) {
+      aiTitle = entry["aiTitle"];
+    }
+  }
+  return customTitle ?? aiTitle;
+}
+
+export async function appendCustomTitle(
+  transcriptPath: string,
+  sessionId: string,
+  title: string,
+): Promise<void> {
+  const entry = {
+    type: "custom-title",
+    customTitle: title,
+    sessionId,
+  };
+  await appendFile(transcriptPath, `${JSON.stringify(entry)}\n`, {
+    mode: 0o600,
+  });
+}

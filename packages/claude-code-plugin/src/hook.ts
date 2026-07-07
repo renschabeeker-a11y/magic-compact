@@ -1,7 +1,11 @@
 import { unlink } from "node:fs/promises";
 import { compactTranscript } from "./compact";
 import { parseHookInput, parseMagicCompactCommand } from "./command";
-import { createTranscriptSession } from "./transcript";
+import {
+  appendCustomTitle,
+  createTranscriptSession,
+  resolveSessionTitle,
+} from "./transcript";
 
 type HookOutput = {
   continue?: false;
@@ -33,6 +37,18 @@ async function main(): Promise<void> {
           "Magic Compact skipped: no older assistant turns to compact.",
       });
       return;
+    }
+
+    try {
+      const title = await resolveSessionTitle(input.transcript_path);
+      if (title !== null) {
+        const label = title.startsWith("[UNCOMPACTED] ")
+          ? title
+          : `[UNCOMPACTED] ${title}`;
+        await appendCustomTitle(input.transcript_path, input.session_id, label);
+      }
+    } catch {
+      // Best-effort labeling; compaction already succeeded.
     }
 
     writeHookOutput({
