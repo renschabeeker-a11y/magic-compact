@@ -12,8 +12,8 @@ Agents MUST read these files before working on platform behavior, and MUST updat
 
 - `docs/Development.md` — setup, repository layout, and maintenance commands.
 - `docs/Core.md` — shared, platform-independent behavior and safety guarantees.
-- `docs/OpenCode.md` — OpenCode runtime behavior specification.
-- `docs/ClaudeCode.md` — Claude Code runtime behavior specification.
+- `docs/OpenCode.md` — **Read if working on OpenCode plugin**: OpenCode runtime behavior specification.
+- `docs/ClaudeCode.md` — **Read if working on Claude Code plugin**: Claude Code runtime behavior specification.
 
 ---
 
