@@ -1,6 +1,6 @@
 {
   "name": "claude-magic-compact",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Lossless context compression for Claude Code.",
   "author": {
     "name": "kevinMEH"
