@@ -4,8 +4,7 @@ Claude Code-specific runtime behavior. Shared plugin behavior lives in [`Core.md
 
 ## Commands
 
-- `/magic-compact [N]` creates a compacted destination Claude Code session.
-- `/magic-compact:magic-compact [N]` is also accepted because plugin skills are namespaced.
+- `/magic-compact [N]` creates a compacted destination Claude Code session. Claude Code expands this to the namespaced form `/claude-magic-compact:magic-compact`, which the hook intercepts.
 - `/magic-stats` is not implemented for Claude Code.
 
 Claude Code does not currently provide a clean first-class stats tracking and injection mechanism comparable to OpenCode, so stats are intentionally omitted.
@@ -28,7 +27,7 @@ This differs from OpenCode, where Magic Compact mutates the current session in p
 ## Hook Interception
 
 - The plugin registers a `UserPromptSubmit` command hook in `hooks/hooks.json`.
-- The hook matcher accepts both `/magic-compact` and `/magic-compact:magic-compact`.
+- The hook matcher accepts both `/magic-compact` and its expanded namespaced form `/claude-magic-compact:magic-compact`.
 - The hook parses `N`; default is `0`.
 - Invalid arguments fail the hook with a user-facing usage error.
 - On success or no-op, the hook returns `continue: false` so Claude Code does not send the slash command to the model.

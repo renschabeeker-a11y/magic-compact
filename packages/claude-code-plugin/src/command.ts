@@ -5,7 +5,8 @@ export type UserPromptSubmitHookInput = {
   prompt: string;
 };
 
-const commandPattern = /^\/magic-compact(?::magic-compact)?(?:\s+(\d+))?\s*$/;
+const commandPattern =
+  /^\/(?:claude-magic-compact:)?magic-compact(?:\s+(\d+))?\s*$/;
 
 export function parseHookInput(rawInput: string): UserPromptSubmitHookInput {
   const input: unknown = JSON.parse(rawInput);
@@ -33,7 +34,7 @@ export function parseHookInput(rawInput: string): UserPromptSubmitHookInput {
 export function parseMagicCompactCommand(prompt: string): number | null {
   const match = prompt.match(commandPattern);
   if (!match) {
-    if (prompt.trim().startsWith("/magic-compact")) {
+    if (/^\/(?:claude-magic-compact:)?magic-compact\b/.test(prompt.trim())) {
       throw new Error("Usage: /magic-compact [N: positive integer]");
     }
     return null;

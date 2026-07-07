@@ -3,7 +3,7 @@
   "hooks": {
     "UserPromptSubmit": [
       {
-        "matcher": "^/magic-compact(?::magic-compact)?(?:\\s+.*)?$",
+        "matcher": "^/(?:claude-magic-compact:)?magic-compact(?:\\s+.*)?$",
         "hooks": [
           {
             "type": "command",
