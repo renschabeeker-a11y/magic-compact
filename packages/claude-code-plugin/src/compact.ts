@@ -459,14 +459,17 @@ ${buildXmlTemplate(turns, nextTurn)}
 
 - Summarize everything between one user message and the next
 - Keep your summaries short and direct
-  - Try to keep your summaries under 200 words whenever possible
-  - You may go over 200 words to preserve summary quality if the assistant turn was genuinely long
+  - Try to keep your summaries under 250 words whenever possible
+  - You may go over 250 words to preserve summary quality if the assistant turn was genuinely long
 - In your summary, include:
-  - Relevant decisions and thought process, including plans if any was presented
+  - Relevant decisions and thought process, including specific plans if any was presented
   - Very brief bullet point summary of your workflow
-  - Final results and summarized output to the user
+  - Errors or bugs encountered + fixes, if any
+  - Final results and summarized output to the user + next steps
 - All tool calls are preserved and automatically included with your summary
   - Therefore, you **do not need to restate details about what tools you used or with what arguments**
+  - However, you include analysis of motivations for tool calls or specific findings from tool call results
+  - E.g. for file reads: What files contains what, what files are junk
 - Do not mention this summarization process; your summaries should naturally replace the assistant's turn within the flow of the conversation
 </system>`;
 }
