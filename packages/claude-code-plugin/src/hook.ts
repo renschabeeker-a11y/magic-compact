@@ -23,13 +23,13 @@ async function main(): Promise<void> {
     }
 
     const destination = await createTranscriptSession(input.transcript_path);
-    const compacted = await compactTranscript(
+    const result = await compactTranscript(
       input.transcript_path,
       destination.transcriptPath,
       destination.sessionId,
       keepTurns,
     );
-    if (!compacted) {
+    if (!result.compacted) {
       await unlink(destination.transcriptPath).catch(() => undefined);
       writeHookOutput({
         continue: false,
@@ -55,6 +55,7 @@ async function main(): Promise<void> {
       continue: false,
       stopReason: [
         "Magic Compact success.",
+        result.focusStatus,
         "To enter the compacted session, run the following command:",
         `/resume ${destination.sessionId}`,
       ].join("\n"),
