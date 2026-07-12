@@ -1,5 +1,6 @@
 import { randomUUID } from "node:crypto";
 import { unlink } from "node:fs/promises";
+import { loadFocusNote } from "./focus";
 import { loadOmissionCache, saveOmissionCache } from "./omission";
 import { pruneTranscriptRow } from "./prune";
 import {
@@ -25,16 +26,22 @@ A compaction operation has just been applied to all messages above. You may have
 </post-compaction-notice>`;
 const SYNTHETIC_MODEL = "<synthetic>";
 
+export type CompactResult = {
+  compacted: boolean;
+  focusStatus: string;
+};
+
 export async function compactTranscript(
   sourceTranscriptPath: string,
   destinationTranscriptPath: string,
   sessionId: string,
   keepTurns: number,
-): Promise<boolean> {
+): Promise<CompactResult> {
   const rows = await readActiveTranscriptRows(sourceTranscriptPath);
   const plan = createPlan(rows, keepTurns);
+  const focus = await loadFocusNote();
   if (plan.summarizedTurns.length === 0) {
-    return false;
+    return { compacted: false, focusStatus: focus.status };
   }
 
   const summaries = await generateSummaries(
@@ -42,6 +49,7 @@ export async function compactTranscript(
     plan.summarizedTurns,
     plan.preservedTurns[0] ?? null,
     latestAssistantModel(rows),
+    focus.note,
   );
   const compactedRows = await buildCompactedRows(plan, summaries, sessionId);
   const metadataEntries = await readPreservedMetadataEntries(
@@ -53,7 +61,7 @@ export async function compactTranscript(
     ...metadataEntries,
     ...compactedRows,
   ]);
-  return true;
+  return { compacted: true, focusStatus: focus.status };
 }
 
 function createPlan(rows: TranscriptRow[], keepTurns: number): Plan {
@@ -87,9 +95,10 @@ async function generateSummaries(
   turns: Turn[],
   nextTurn: Turn | null,
   model: string | null,
+  focusNote: string | null,
 ): Promise<string[]> {
   const analysis = await copyTranscriptToNewSession(transcriptPath);
-  const prompt = buildCompactionPrompt(turns, nextTurn);
+  const prompt = buildCompactionPrompt(turns, nextTurn, focusNote);
   const args = [
     "claude",
     "-p",
@@ -430,7 +439,11 @@ function copySessionFields(
   return copied;
 }
 
-function buildCompactionPrompt(turns: Turn[], nextTurn: Turn | null): string {
+function buildCompactionPrompt(
+  turns: Turn[],
+  nextTurn: Turn | null,
+  focusNote: string | null,
+): string {
   return `<system>
 # Attention: Conversation Compaction Required
 
@@ -471,7 +484,28 @@ ${buildXmlTemplate(turns, nextTurn)}
   - However, you include analysis of motivations for tool calls or specific findings from tool call results
   - E.g. for file reads: What files contains what, what files are junk
 - Do not mention this summarization process; your summaries should naturally replace the assistant's turn within the flow of the conversation
-</system>`;
+${buildFocusSection(focusNote)}</system>`;
+}
+
+function buildFocusSection(focusNote: string | null): string {
+  if (focusNote === null) {
+    return "";
+  }
+
+  return `
+## Compaction Focus (user-provided; overrides brevity)
+
+A focus note is active for this compaction. It names what must survive
+summarization. When a turn touches anything the focus names, preserve those
+specifics in that turn's summary — exact phrasings, names, decisions, laws,
+and open commitments — even where the brevity guidelines above would compress
+them. The focus note only raises what must be kept; it never removes any
+requirement from the guidelines above.
+
+<focus>
+${focusNote}
+</focus>
+`;
 }
 
 function buildXmlTemplate(turns: Turn[], nextTurn: Turn | null): string {
