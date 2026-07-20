@@ -110,10 +110,9 @@ async function generateSummaries(
   if (model !== null) {
     args.push("--model", model);
   }
-  args.push(prompt);
-
   try {
     const summaryProcess = Bun.spawn(args, {
+      stdin: new TextEncoder().encode(prompt),
       stdout: "pipe",
       stderr: "pipe",
     });
