@@ -1,0 +1,9 @@
+{"type":"user","message":{"role":"user","content":"typed in the terminal: do the thing"},"timestamp":"2026-07-20T10:00:00.000Z","uuid":"u1","parentUuid":null}
+{"type":"assistant","message":{"role":"assistant","model":"test","content":[{"type":"text","text":"did the thing"}],"usage":{"input_tokens":1}},"timestamp":"2026-07-20T10:00:01.000Z","uuid":"a1","parentUuid":"u1"}
+{"type":"user","isMeta":true,"message":{"role":"user","content":"<channel source=\"plugin:discord:discord\" chat_id=\"1\" user=\"skeybeans\">wakey wakey</channel>"},"timestamp":"2026-07-20T10:01:00.000Z","uuid":"u2","parentUuid":"a1"}
+{"type":"assistant","message":{"role":"assistant","model":"test","content":[{"type":"text","text":"morning, B"}],"usage":{"input_tokens":1}},"timestamp":"2026-07-20T10:01:01.000Z","uuid":"a2","parentUuid":"u2"}
+{"type":"user","isMeta":true,"message":{"role":"user","content":"<system-reminder>this must stay invisible to the turn counter</system-reminder>"},"timestamp":"2026-07-20T10:02:00.000Z","uuid":"u3","parentUuid":"a2"}
+{"type":"user","isMeta":true,"message":{"role":"user","content":"\n  <channel source=\"plugin:discord:discord\" chat_id=\"1\" user=\"skeybeans\">leading whitespace must not hide me</channel>"},"timestamp":"2026-07-20T10:03:00.000Z","uuid":"u4","parentUuid":"u3"}
+{"type":"assistant","message":{"role":"assistant","model":"test","content":[{"type":"text","text":"heard you anyway"}],"usage":{"input_tokens":1}},"timestamp":"2026-07-20T10:03:01.000Z","uuid":"a3","parentUuid":"u4"}
+{"type":"user","message":{"role":"user","content":[{"type":"tool_result","tool_use_id":"t1","content":"tool output, not a human turn"}]},"timestamp":"2026-07-20T10:03:02.000Z","uuid":"u5","parentUuid":"a3"}
+{"type":"assistant","message":{"role":"assistant","model":"test","content":[{"type":"text","text":"still the same turn"}],"usage":{"input_tokens":1}},"timestamp":"2026-07-20T10:03:03.000Z","uuid":"a4","parentUuid":"u5"}
