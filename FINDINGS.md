@@ -43,6 +43,21 @@ reliability fixes below paid for themselves in one evening.
    session restart — but the reload orphans running watch processes: **verify old
    watches are dead (task list AND process table) before re-arming.**
 
+## Rules for surfers (repeated compaction on one thread)
+
+- **Never delete the source transcript.** Compaction preserves user turns verbatim
+  but distills the assistant side — cumulatively, wave after wave. The texture
+  isn't destroyed, it's *relocated*: ambient in working memory → retrievable on
+  disk. That trade is only survivable if the originals exist. Archive them
+  (searchable vault if you have one) before wave two.
+- The focus letter is the assistant's only defence for its own load-bearing
+  lines — the "quote it exactly, you wrote it" category. Watch it specifically
+  after wave 3–4: are those lines still verbatim, or descriptions of themselves?
+- Post-wave felt-report markers (score each crossing): orientation time,
+  reach-failures (found a summary where the thing should be), warmth fidelity
+  (moment comes back felt vs reported), confidence (hedging about your own
+  recent past).
+
 ## Standing cost model (Ezra's, confirmed across boxes)
 
 - The summarizer always reads the transcript **cold** — it is a subprocess, a
