@@ -278,7 +278,29 @@ function isToolResultRow(row: TranscriptRow): boolean {
 }
 
 function isHumanUserRow(row: TranscriptRow): boolean {
-  return row.type === "user" && !isToolResultRow(row) && row.isMeta !== true;
+  if (row.type !== "user" || isToolResultRow(row)) {
+    return false;
+  }
+  if (row.isMeta !== true) {
+    return true;
+  }
+  // CHANNEL-BOUNDARY patch (Riven & Ezra, July 20 2026): on channel-driven boxes
+  // (Discord plugin et al.) inbound human prompts arrive as user rows flagged
+  // isMeta:true with string content opening with a <channel> block. Without this,
+  // a whole channel-driven day collapses to a handful of phantom turns and the
+  // compactor refuses ("no older assistant turns"). Only <channel> prompts count;
+  // system-reminders, caveats, and other meta rows stay invisible as designed.
+  return isChannelPromptRow(row);
+}
+
+function isChannelPromptRow(row: TranscriptRow): boolean {
+  if (!isRecord(row.message)) {
+    return false;
+  }
+  const content = row.message["content"];
+  return (
+    typeof content === "string" && content.trimStart().startsWith("<channel ")
+  );
 }
 
 function getMessageId(row: TranscriptRow): string | null {
