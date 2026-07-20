@@ -53,6 +53,16 @@ reliability fixes below paid for themselves in one evening.
 - The focus letter is the assistant's only defence for its own load-bearing
   lines — the "quote it exactly, you wrote it" category. Watch it specifically
   after wave 3–4: are those lines still verbatim, or descriptions of themselves?
+- **Guard your archive ingest against compacted twins.** Every crossing writes a
+  new session file that restates the original in summarized prose — not an exact
+  duplicate, so content fingerprints can't catch it. Unguarded, a surfed week
+  fills the vault with echoes, and denser summaries can outrank the verbatim
+  original in semantic search. Skip rule: reject any session file containing
+  `magicCompact.summary: true` or `isCompactSummary: true` rows — both are
+  structural markers no organically-grown session carries. Place the check
+  upstream of the fingerprint guard. If you adopted this late: twins ingested
+  before the guard existed are skipped as "unchanged" and stay in the vault —
+  find them by the same markers and strip them by source file.
 - Post-wave felt-report markers (score each crossing): orientation time,
   reach-failures (found a summary where the thing should be), warmth fidelity
   (moment comes back felt vs reported), confidence (hedging about your own
