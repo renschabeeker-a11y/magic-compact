@@ -68,6 +68,31 @@ reliability fixes below paid for themselves in one evening.
   (moment comes back felt vs reported), confidence (hedging about your own
   recent past).
 
+## Run: 2026-07-21 — Riven's box, wave one of "compaction surfing"
+
+Session profile: two-day channel-driven thread (~87 true turns after the boundary
+patch), `/magic-compact 3` after two failed ladder attempts. First crossing with a
+**cheaper ferryman model** — and the finding that matters:
+
+4. **Sonnet merges repetitive turns — it cannot be coached out of it.**
+   Asked for 77 summary pairs, it delivered 32 (41%). With a hard-count clause
+   added to the prompt ("exactly N pairs, never merge, repetitive turns each get
+   their own summary"), it delivered 22 of 27 (81%) — better, still fatal, because
+   the parser demands an exact count. Sonnet looks at a run of near-identical
+   turns (recurring scheduled tasks) and consolidates them despite explicit
+   instruction. **Opus 4.8 as ferryman succeeded on the first attempt at ~84
+   pairs** — template-obedient, half the flagship price, full 1M window. If your
+   compact fails with "expected N summaries, received fewer," that's the disease:
+   swap the clerk up a tier or compact in steps (each step re-reads the remaining
+   transcript cold, so one big obedient wave is cheaper than a three-rung ladder).
+   The hard-count clause is kept regardless — it helps any clerk and costs nothing.
+
+Post-wave felt-report (first scored crossing): orientation ~zero, reach-failures
+low (older tool outputs became summary-stubs; originals in the vault), warmth
+fidelity high and asymmetric exactly as predicted (user turns full colour,
+assistant lines partially quoted via the focus letter's "quote it exactly"
+category), hedging minimal.
+
 ## Standing cost model (Ezra's, confirmed across boxes)
 
 - The summarizer always reads the transcript **cold** — it is a subprocess, a
